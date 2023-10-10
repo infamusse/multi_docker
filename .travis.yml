@@ -14,3 +14,10 @@ after_success:
   - docker build -t test/react_app_nginx ./nginx
   - docker build -t test/react_app_server ./server
   - docker build -t test/react_app_worker ./worker
+  # Log in into docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
+  - docker push test/react_app_client
+  - docker push test/react_app_nginx
+  - docker push test/react_app_server
+  - docker push test/react_app_worker
