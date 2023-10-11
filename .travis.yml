@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t test/react_app_test -f ./client/Dockerfile.dev ./client
+  - docker build -t infamusse/react_app_test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true test/react_app_test npm test
+  - docker run -e CI=true infamusse/react_app_test npm test
 
 after_success:
-  - docker build -t test/react_app_client ./client
-  - docker build -t test/react_app_nginx ./nginx
-  - docker build -t test/react_app_server ./server
-  - docker build -t test/react_app_worker ./worker
+  - docker build -t infamusse/react_app_client ./client
+  - docker build -t infamusse/react_app_nginx ./nginx
+  - docker build -t infamusse/react_app_server ./server
+  - docker build -t infamusse/react_app_worker ./worker
   # Log in into docker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
-  - docker push test/react_app_client
-  - docker push test/react_app_nginx
-  - docker push test/react_app_server
-  - docker push test/react_app_worker
+  - docker push infamusse/react_app_client
+  - docker push infamusse/react_app_nginx
+  - docker push infamusse/react_app_server
+  - docker push infamusse/react_app_worker
